@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
-import { ProducerService } from './producer.service';
+import { ToggleFetcherMessageDto } from '../../../../shared/src/toggle-message.dto';
+import { ProducerService } from '../../producer.service';
 
 @Injectable()
 export class AppService {

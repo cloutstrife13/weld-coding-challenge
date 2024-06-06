@@ -2,13 +2,13 @@ import * as request from 'supertest';
 
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { AppModule } from '../src/app.module';
+import { AppModule } from '../src/modules/app/app.module';
 import { INestApplication } from '@nestjs/common';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { AppService } from '../src/app.service';
+import { AppService } from '../src/modules/app/app.service';
 import { ProducerService } from '../src/producer.service';
-import { AppController } from '../src/app.controller';
+import { AppController } from '../src/modules/app/app.controller';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;

@@ -1,4 +1,4 @@
-import { AppService } from '../src/app.service';
+import { AppService } from '../src/modules/app/app.service';
 import { ProducerService } from '../src/producer.service';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
