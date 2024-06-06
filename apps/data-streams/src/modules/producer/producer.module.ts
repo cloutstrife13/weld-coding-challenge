@@ -17,5 +17,6 @@ import { ProducerService } from '../producer/producer.service';
   ],
   controllers: [],
   providers: [ProducerService],
+  exports: [ProducerService],
 })
 export class ProducerModule {}
