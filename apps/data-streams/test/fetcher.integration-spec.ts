@@ -36,7 +36,7 @@ describe('FetcherService', () => {
   it('receives a message for changing the fetch status', async () => {
     const input: ToggleFetcherMessageDto = { isFetchEnabled: true };
 
-    const result = fetcherService.postToggleFetcherMessage(input);
+    const result = await fetcherService.postToggleFetcherMessage(input);
 
     expect(result).toEqual(input);
   });

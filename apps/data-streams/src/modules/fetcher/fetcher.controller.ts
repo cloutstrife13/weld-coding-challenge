@@ -8,7 +8,7 @@ export class FetcherController {
 
   @Post('/on')
   async postEnableToggleFetcherMessage(): Promise<ToggleFetcherMessageDto> {
-    const message = this.fetcherService.postToggleFetcherMessage({
+    const message = await this.fetcherService.postToggleFetcherMessage({
       isFetchEnabled: true,
     });
 
@@ -17,8 +17,8 @@ export class FetcherController {
 
   @Post('/off')
   async postDisableToggleFetcherMessage(): Promise<ToggleFetcherMessageDto> {
-    const message = this.fetcherService.postToggleFetcherMessage({
-      isFetchEnabled: true,
+    const message = await this.fetcherService.postToggleFetcherMessage({
+      isFetchEnabled: false,
     });
 
     return message;

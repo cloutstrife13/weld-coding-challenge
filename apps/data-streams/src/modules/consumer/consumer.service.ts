@@ -16,13 +16,13 @@ export class ConsumerService {
     this.logger.debug('Message acknowledged');
   }
 
-  storeExternalApiResponseInDatabase(data: unknown) {
-    this.databaseService.create({ input: data });
+  async storeExternalApiResponseInDatabase(data: unknown) {
+    await this.databaseService.create(data);
     this.logger.debug('Response obtained from worker and saved');
   }
 
   async handlePublishResponseMessage(data: unknown, context: RmqContext) {
     this.acknowledgeMessage(context);
-    this.storeExternalApiResponseInDatabase(data);
+    await this.storeExternalApiResponseInDatabase(data);
   }
 }

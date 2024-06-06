@@ -12,7 +12,7 @@ export class ConsumerController {
   constructor(private readonly consumerService: ConsumerService) {}
 
   @MessagePattern('publish-response-message')
-  toggleFetcher(@Payload() data: unknown, @Ctx() context: RmqContext) {
-    this.consumerService.handlePublishResponseMessage(data, context);
+  async toggleFetcher(@Payload() data: unknown, @Ctx() context: RmqContext) {
+    await this.consumerService.handlePublishResponseMessage(data, context);
   }
 }
