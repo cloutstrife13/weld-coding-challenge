@@ -12,7 +12,7 @@ export class FetcherService {
 
   private readonly logger = new Logger(FetcherService.name);
 
-  @Cron(CronExpression.EVERY_30_SECONDS, { name: 'fetcher', disabled: true })
+  @Cron(CronExpression.EVERY_5_MINUTES, { name: 'fetcher', disabled: true })
   async handleCron() {
     this.logger.debug('Fetching data from external API every 5th minute');
     const response = await this.httpService.axiosRef.get(
