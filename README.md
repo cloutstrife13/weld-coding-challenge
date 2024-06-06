@@ -1,55 +1,65 @@
 # Welcome to Welds coding-challenge
 
-## Introduction
-Here at Weld we use [NestJS](https://nestjs.com/) for our applications. So this project also reflects that. On our front-end we use NextJS and GraphQL. For simplicity we have used the monorepo structure from NestJS.
+## Implementation Strategy
 
-Fork this repository and create your own repository to get started.
+Prior to starting the work, I had to go through the README in order to work out this challenge's requirements.
 
-## Challenge
-One of our customers wants us to help them build a pipeline for an API (select whichever you want from [Public APIs](https://github.com/public-apis/public-apis)). And they want us to setup a new data-pipeline for them to get information out and into their current data-warehouse.
+Given the fact that the task has mandated the implementation of a microservice architecture, I had to line up the infrastructure first. To do so, I have created `Dockerfiles` for each NestJS microservice and a `docker-compose.yaml` file for one-shot launching the backend for speed's sake. Following resources were needed:
 
-To accomplish this you will build two services:
-- **Data-streams**: Our API that can receive calls and issue commands to **worker**. This service also stores any information that our customer wants to fetch.
-- **Worker:** Fetches the data from external API. Makes any transformations you see fit. And sends it back to **data-streams** for storage.
+1. As the `worker` had to continuously fetch for data whilst encapsulated from the outside world, it had to be accessed from another service. For this approach, `RabbitMQ` has been chosen.
+2. The `worker` had to forward the data fetched to the `data-streams` microservice, allowing it to listen to a topic through which it can obtain the data forwarded and store in a database. I chose `MongoDB` for storing simple documents.
 
-### Steps in challenge
-- Configure a message protocol between the two services. You can get inspiration from the [nestjs docs.](https://docs.nestjs.com/microservices/basics) Choose which ever you want but tell us why in your answer.
-- Create an endpoint on **data-streams** that tells **worker** to start fetching data on an interval (every 5 minutes).
-- Setup an [http module](https://docs.nestjs.com/techniques/http-module) that **worker** can use to communicate with the external API.
-- Send the data and store the results on **data-streams** using internal communication protocol.
-- Make an endpoint on **data-streams** that can fetch the data stored on **data-streams**. Use whatever storage you see fit but tell us why you chose it.
-- Make an endpoint on **data-streams** that can stop the data fetching on **worker**.
+Once the infrastructure has been set up, I've incrementally implemented features for finalising this challenge. I have sporadically employed Test-Driven Development for E2E and Integration tests in order to guarantee the robustness of the code.
 
-## How we evaluate
-The test is solely for you to show techniques and design patterns you normally use. Once the techniques and design patterns have been demonstrated then that is enough. No neeed for additional boilerplate. Just include a future work section in your answer and we will include questions in the technical interview.
+Unlike `data-streams`, `worker` has no APIs exposed at all, making its invocation via `RabbitMQ` mandatory.
 
-- We understand that this can be **time consuming**. If you are short on time - then leave something out. But be sure to tell us your approach to the problem in the documentation.
-- A documented answer that explains your approach, short-comings, how-to-run and future work.
-- A working solution. Preferably with some tests to give us an idea of how you write tests (you don't need to put it all under test).
-- Reliability is very important when dealing with data-pipelines. So any measures you can add to keep the data-flowing will be appreciated.
-- We appreciate small commits with a trail of messages that shows us how you work.
+Setting up `RabbitMQ` was quite tedious since it was the first time touching upon it. However, its function within the architecture was clear from the beginning, allowing me to refer to my previous experiences with AWS SQS and Azure Service Bus.
 
-## Project structure
+For `RabbitMQ`, two queues were required. One for sending `fetcher` status updates for enabling or disabling the diachronical data acquisition in `worker` from `data-streams` to `worker` and another one for sending the external data fetched from `worker` to `data-streams`. Had I only used one queue, the reliability of the data transmission would have suffered immensely since the second transmission from `worker` to `data-streams` has led to a crash of the `worker`.
+
+Towards the end, I have pushed the data received from `worker` to `MongoDB` and created a new endpoint for obtaining all the data fetched from the database. Realising that the database is being populated in real-time behind the scenes is quite neat thanks to `RabbitMQ` and CRON jobs. Finally, I have refactored the code a bit in order to improve this code's readability.
+
+Since I have been mostly focusing on delivering a working solution, I have taken advantage of NestJS's CRON Scheduler that would enable fetching data over time. Another approach would have been a `while` loop based on a singleton's state that would have been switched on and off but that would have led to writing boilerplate code which is overkill.
+
+## Future work
+
+Whilst working on this app, I haven't paid much attention on perfection and robustness but speed and core features. Since it is a working solution, I would recommend the following for improving it:
+
+- More error handing for production-readiness
+- Logging with emphasis on traceability such that failures can be traced on tools such as AWS CloudWatch
+- Code sharing for reducing duplicated code
+- Adding a microservice for configuring the behaviour of `worker` (e.g. readjusting the CRON time or adding/deleting external endpoints in real-time)
+- Data transformation module for the `worker`
+- Subscription to an endpoint, allowing users to observe or create summaries of events
+- Exposing the configuration state of `worker` to one specific microservice
+- Adding health status endpoints for all microservices
+- Creating a SaaS platform to provide managed data streaming services to customers
+
+## Prerequisites
+
+To launch this application, you must have Docker installed.
+
+## Repo initialisation
+
+```bash
+yarn
 ```
-├── README.md
-├── apps
-│   ├── data-streams
-│   └── worker
-├── package.json
-```
-### data-streams:
-This is our API. We will be able to issue HTTP requests to this and have it talk to our microservice **worker**.
-We also store any information that **worker** sends our way. This project has been setup as a hybrid app. It can both function as an API but also as a microservice with an internal communication layer.
 
-You can start data-streams with:
-```
-yarn start
+## Launching
+
+```bash
+docker-compose up
 ```
 
-### worker:
-This is the worker microservice that is in charge of talking to the external API. It will fetch data when issued a command from **data-streams** and then return the results. This project only functions as a microservice which means it can only receive commands from the internal communication layer.
+## Testing
 
-You can start worker with:
+```bash
+# Please refer to Launching above as the whole infrastructure must be up and running
+yarn test:e2e
 ```
-yarn start worker
-```
+
+## Endpoints
+
+- **POST** http://localhost:3001/fetcher/on
+- **POST** http://localhost:3001/fetcher/off
+- **GET** http://localhost:3001/response
