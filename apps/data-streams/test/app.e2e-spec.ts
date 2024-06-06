@@ -6,7 +6,7 @@ import { INestApplication } from '@nestjs/common';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppService } from '../src/modules/app/app.service';
-import { ProducerService } from '../src/producer.service';
+import { ProducerService } from '../src/modules/producer/producer.service';
 import { AppController } from '../src/modules/app/app.controller';
 
 describe('AppController (e2e)', () => {
@@ -35,7 +35,7 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/toggleFetch (POST)', () => {
+  it('/fetcher (POST)', () => {
     const input: ToggleFetcherMessageDto = {
       isFetchEnabled: true,
     };
