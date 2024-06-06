@@ -3,7 +3,7 @@ import * as request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { INestApplication } from '@nestjs/common';
-import { WorkerModule } from '../src/worker.module';
+import { WorkerModule } from '../src/modules/worker/worker.module';
 
 describe('WorkerController (e2e)', () => {
   let app: INestApplication;
