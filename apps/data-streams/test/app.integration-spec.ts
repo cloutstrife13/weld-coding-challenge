@@ -1,7 +1,7 @@
 import { AppService } from '../src/modules/app/app.service';
 import { ProducerService } from '../src/producer.service';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
-import { ClientProxy, ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Test } from '@nestjs/testing';
 
 describe('AppService', () => {

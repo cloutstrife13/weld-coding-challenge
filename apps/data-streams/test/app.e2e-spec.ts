@@ -1,8 +1,7 @@
 import * as request from 'supertest';
 
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 
-import { AppModule } from '../src/modules/app/app.module';
 import { INestApplication } from '@nestjs/common';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
