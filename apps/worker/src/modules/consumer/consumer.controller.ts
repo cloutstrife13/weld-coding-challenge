@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { WorkerService } from './worker.service';
+import { ConsumerService } from './consumer.service';
 import {
   Ctx,
   MessagePattern,
@@ -9,14 +9,14 @@ import {
 import { ToggleFetcherMessageDto } from 'apps/shared/src/toggle-message.dto';
 
 @Controller()
-export class WorkerController {
-  constructor(private readonly workerService: WorkerService) {}
+export class ConsumerController {
+  constructor(private readonly ConsumerService: ConsumerService) {}
 
   @MessagePattern('toggle-fetcher-message')
   toggleFetcher(
     @Payload() data: ToggleFetcherMessageDto,
     @Ctx() context: RmqContext,
   ) {
-    this.workerService.handleToggleFetcherMessage(data, context);
+    this.ConsumerService.handleToggleFetcherMessage(data, context);
   }
 }

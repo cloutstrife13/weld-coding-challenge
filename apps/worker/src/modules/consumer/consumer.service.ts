@@ -4,10 +4,10 @@ import { SchedulerRegistry } from '@nestjs/schedule';
 import { ToggleFetcherMessageDto } from 'apps/shared/src/toggle-message.dto';
 
 @Injectable()
-export class WorkerService {
+export class ConsumerService {
   constructor(private readonly schedulerRegistry: SchedulerRegistry) {}
 
-  private readonly logger = new Logger(WorkerService.name);
+  private readonly logger = new Logger(ConsumerService.name);
 
   acknowledgeMessage(context: RmqContext) {
     const channel = context.getChannelRef();

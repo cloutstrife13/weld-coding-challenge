@@ -5,9 +5,9 @@ import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { AppService } from '../src/modules/app/app.service';
+import { AppService } from '../src/modules/app.service';
 import { ProducerService } from '../src/modules/producer/producer.service';
-import { AppController } from '../src/modules/app/app.controller';
+import { AppController } from '../src/modules/app.controller';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;

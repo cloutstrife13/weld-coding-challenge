@@ -3,14 +3,14 @@ import * as request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { INestApplication } from '@nestjs/common';
-import { WorkerModule } from '../src/modules/worker/worker.module';
+import { ConsumerModule } from '../src/modules/consumer/consumer.module';
 
-describe('WorkerController (e2e)', () => {
+describe('ConsumerController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [WorkerModule],
+      imports: [ConsumerModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
