@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ToggleFetcherMessageDto } from './toggle-message.dto';
+import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 
 @Controller()
 export class AppController {
@@ -10,6 +10,8 @@ export class AppController {
   async postToggleFetcherMessage(
     @Body() message: ToggleFetcherMessageDto,
   ): Promise<ToggleFetcherMessageDto> {
-    return this.appService.postToggleFetcherMessage(message);
+    this.appService.postToggleFetcherMessage(message);
+
+    return message;
   }
 }
