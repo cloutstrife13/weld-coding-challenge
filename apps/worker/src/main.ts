@@ -8,8 +8,12 @@ async function bootstrap() {
     {
       options: {
         port: 3002,
+        urls: ['amqp://localhost:5672'],
+        queue: 'datastream_queue',
+        queueOptions: {
+          durable: false,
+        },
       },
-      // Setup communication protocol here
     },
   );
   app.listen();
