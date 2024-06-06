@@ -2,13 +2,14 @@ import { AppService } from '../src/modules/app.service';
 import { ProducerService } from '../src/modules/producer/producer.service';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { Test } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AppService', () => {
+  let app: TestingModule;
   let appService: AppService;
 
   beforeAll(async () => {
-    const module = await Test.createTestingModule({
+    app = await Test.createTestingModule({
       imports: [
         ClientsModule.register([
           {
@@ -25,7 +26,11 @@ describe('AppService', () => {
       exports: [ProducerService],
     }).compile();
 
-    appService = module.get<AppService>(AppService);
+    appService = app.get<AppService>(AppService);
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 
   it('receives a message for changing the fetch status', async () => {

@@ -10,8 +10,13 @@ export class DatabaseService {
     private workerResponseModel: Model<unknown>,
   ) {}
 
-  async create(workerResponse: unknown): Promise<unknown> {
+  create(workerResponse: unknown): Promise<unknown> {
     const createdResponse = new this.workerResponseModel(workerResponse);
     return createdResponse.save();
+  }
+
+  find(): Promise<unknown[]> {
+    const responses = this.workerResponseModel.find();
+    return responses;
   }
 }

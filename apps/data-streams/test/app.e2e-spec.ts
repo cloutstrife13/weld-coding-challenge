@@ -12,7 +12,7 @@ import { AppController } from '../src/modules/app.controller';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [
         ClientsModule.register([
@@ -33,6 +33,10 @@ describe('AppController (e2e)', () => {
 
     app = module.createNestApplication();
     await app.init();
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 
   it('/fetcher (POST)', () => {

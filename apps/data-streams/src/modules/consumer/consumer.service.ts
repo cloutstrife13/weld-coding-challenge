@@ -17,7 +17,7 @@ export class ConsumerService {
   }
 
   storeExternalApiResponseInDatabase(data: unknown) {
-    this.databaseService.create(data);
+    this.databaseService.create({ input: data });
     this.logger.debug('Response obtained from worker and saved');
   }
 
