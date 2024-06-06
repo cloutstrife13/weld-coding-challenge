@@ -1,0 +1,24 @@
+services:
+  data-streams:
+    container_name: data-streams
+    build:
+      context: .
+    ports:
+      - '3001:3001'
+    networks:
+      - weld
+    depends_on:
+      - worker
+
+  worker:
+    container_name: worker
+    build:
+      context: .
+      dockerfile: ./Dockerfile.worker
+    ports:
+      - '3002:3002'
+    networks:
+      - weld
+
+networks:
+  weld:

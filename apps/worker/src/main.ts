@@ -7,7 +7,7 @@ async function bootstrap() {
     WorkerModule,
     {
       options: {
-        port: 3001,
+        port: 3002,
       },
       // Setup communication protocol here
     },
