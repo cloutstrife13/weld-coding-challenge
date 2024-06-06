@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { AppModule } from '../src/app.module';
 import { INestApplication } from '@nestjs/common';
+import { ToggleFetcherMessageDto } from '../src/toggle-message.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -17,10 +18,15 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/toggleFetch (POST)', () => {
+    const input: ToggleFetcherMessageDto = {
+      isFetchEnabled: true,
+    };
+
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+      .post('/fetcher')
+      .send(input)
+      .expect(201)
+      .expect(input);
   });
 });
