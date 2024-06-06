@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ToggleFetcherMessageDto } from '../../../shared/src/toggle-message.dto';
-import { ProducerService } from './producer/producer.service';
+import { ToggleFetcherMessageDto } from '../../../../shared/src/toggle-message.dto';
+import { ProducerService } from '../producer/producer.service';
 
 @Injectable()
-export class AppService {
+export class FetcherService {
   constructor(private readonly producerService: ProducerService) {}
 
   postToggleFetcherMessage(

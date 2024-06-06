@@ -1,12 +1,12 @@
-import { AppService } from '../src/modules/app.service';
+import { FetcherService } from '../src/modules/fetcher/fetcher.service';
 import { ProducerService } from '../src/modules/producer/producer.service';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AppService', () => {
+describe('FetcherService', () => {
   let app: TestingModule;
-  let appService: AppService;
+  let fetcherService: FetcherService;
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
@@ -22,11 +22,11 @@ describe('AppService', () => {
           },
         ]),
       ],
-      providers: [AppService, ProducerService],
+      providers: [FetcherService, ProducerService],
       exports: [ProducerService],
     }).compile();
 
-    appService = app.get<AppService>(AppService);
+    fetcherService = app.get<FetcherService>(FetcherService);
   });
 
   afterAll(async () => {
@@ -36,7 +36,7 @@ describe('AppService', () => {
   it('receives a message for changing the fetch status', async () => {
     const input: ToggleFetcherMessageDto = { isFetchEnabled: true };
 
-    const result = await appService.postToggleFetcherMessage(input);
+    const result = fetcherService.postToggleFetcherMessage(input);
 
     expect(result).toEqual(input);
   });

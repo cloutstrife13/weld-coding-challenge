@@ -5,11 +5,11 @@ import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { ToggleFetcherMessageDto } from '../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { AppService } from '../src/modules/app.service';
+import { FetcherService } from '../src/modules/fetcher/fetcher.service';
 import { ProducerService } from '../src/modules/producer/producer.service';
-import { AppController } from '../src/modules/app.controller';
+import { FetcherController } from '../src/modules/fetcher/fetcher.controller';
 
-describe('AppController (e2e)', () => {
+describe('FetcherController (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -26,8 +26,8 @@ describe('AppController (e2e)', () => {
           },
         ]),
       ],
-      controllers: [AppController],
-      providers: [AppService, ProducerService],
+      controllers: [FetcherController],
+      providers: [FetcherService, ProducerService],
       exports: [ProducerService],
     }).compile();
 
@@ -45,7 +45,7 @@ describe('AppController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/fetcher')
+      .post('/fetcher/on')
       .send(input)
       .expect(201)
       .expect(input);
