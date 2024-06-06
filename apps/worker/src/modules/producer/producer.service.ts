@@ -8,7 +8,7 @@ export class ProducerService {
     @Inject('rabbit-mq-service') private readonly client: ClientProxy,
   ) {}
 
-  addFetchOptionToQueue(message: ToggleFetcherMessageDto) {
-    this.client.send('toggle-fetcher-message', message).subscribe();
+  addFetchOptionToQueue(message: unknown) {
+    this.client.send('publish-response-message', message).subscribe();
   }
 }

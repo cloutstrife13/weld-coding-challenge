@@ -6,10 +6,10 @@ import { ProducerService } from './producer/producer.service';
 export class AppService {
   constructor(private readonly producerService: ProducerService) {}
 
-  async postToggleFetcherMessage(
+  postToggleFetcherMessage(
     message: ToggleFetcherMessageDto,
-  ): Promise<ToggleFetcherMessageDto> {
-    await this.producerService.addFetchOptionToQueue(message);
+  ): ToggleFetcherMessageDto {
+    this.producerService.addFetchOptionToQueue(message);
 
     return message;
   }
