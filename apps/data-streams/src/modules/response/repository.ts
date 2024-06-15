@@ -25,9 +25,9 @@ export class ResponseRepository {
 
   async find(): Promise<Response[]> {
     this.logger.debug('Attempt finding streamed data in database');
-    const responses = this.workerResponseModel.find();
+    const responses = await this.workerResponseModel.find();
 
-    this.logger.debug(`${(await responses).length} entries found`);
+    this.logger.debug(`${responses.length} entries found`);
     return responses;
   }
 }

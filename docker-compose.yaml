@@ -41,6 +41,7 @@ services:
     container_name: mongodb
     ports:
       - 27017:27017
+    restart: always
     networks:
       - weld
 
