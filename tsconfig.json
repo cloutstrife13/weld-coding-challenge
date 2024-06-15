@@ -11,6 +11,9 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "paths": {}
+    "paths": {
+      "@cloutstrife13/shared": ["libs/shared/src"],
+      "@cloutstrife13/shared/*": ["libs/shared/src/*"]
+    }
   }
 }

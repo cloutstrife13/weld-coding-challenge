@@ -1,5 +1,5 @@
+import { ToggleFetcherMessageDto } from '@cloutstrife13/shared';
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { ToggleFetcherMessageDto } from '../../../../shared/src/toggle-message.dto';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()

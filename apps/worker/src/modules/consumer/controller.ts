@@ -6,7 +6,7 @@ import {
   Payload,
   RmqContext,
 } from '@nestjs/microservices';
-import { ToggleFetcherMessageDto } from 'apps/shared/src/toggle-message.dto';
+import { ToggleFetcherMessageDto } from '@cloutstrife13/shared';
 
 @Controller()
 export class ConsumerController {

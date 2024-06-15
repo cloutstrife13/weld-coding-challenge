@@ -3,11 +3,11 @@ import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 
 import { INestApplication } from '@nestjs/common';
-import { ToggleFetcherMessageDto } from '../../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { FetcherService } from '../../src/modules/fetcher/service';
 import { ProducerService } from '../../src/modules/producer/service';
 import { FetcherController } from '../../src/modules/fetcher/controller';
+import { ToggleFetcherMessageDto } from '@cloutstrife13/shared';
 
 describe('FetcherController (e2e)', () => {
   let app: INestApplication;

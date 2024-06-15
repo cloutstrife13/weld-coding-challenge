@@ -1,7 +1,7 @@
+import { ToggleFetcherMessageDto } from '@cloutstrife13/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { RmqContext } from '@nestjs/microservices';
 import { SchedulerRegistry } from '@nestjs/schedule';
-import { ToggleFetcherMessageDto } from 'apps/shared/src/toggle-message.dto';
 
 @Injectable()
 export class ConsumerService {

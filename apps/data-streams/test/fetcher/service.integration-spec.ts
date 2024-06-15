@@ -1,6 +1,6 @@
+import { ToggleFetcherMessageDto } from '@cloutstrife13/shared';
 import { FetcherService } from '../../src/modules/fetcher/service';
 import { ProducerService } from '../../src/modules/producer/service';
-import { ToggleFetcherMessageDto } from '../../../shared/src/toggle-message.dto';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 
