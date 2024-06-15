@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ResponseController } from './response.controller';
-import { ResponseService } from './response.service';
+import { ResponseController } from './controller';
+import { ResponseService } from './service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Response, ResponseSchema } from './response.schema';
-import { ResponseRepository } from './response.repository';
+import { Response, ResponseSchema } from './schema';
+import { ResponseRepository } from './repository';
 
 @Module({
   imports: [

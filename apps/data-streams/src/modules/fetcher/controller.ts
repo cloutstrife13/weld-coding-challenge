@@ -1,5 +1,5 @@
 import { Controller, Post } from '@nestjs/common';
-import { FetcherService } from './fetcher.service';
+import { FetcherService } from './service';
 import { ToggleFetcherMessageDto } from '../../../../shared/src/toggle-message.dto';
 
 @Controller('/fetcher')

@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { RmqContext } from '@nestjs/microservices';
-import { ResponseService } from '../response/response.service';
+import { ResponseService } from '../response/service';
 
 @Injectable()
 export class ConsumerService {

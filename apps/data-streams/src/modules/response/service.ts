@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Response } from './response.schema';
-import { ResponseRepository } from './response.repository';
+import { Response } from './schema';
+import { ResponseRepository } from './repository';
 import { ResponseParams } from '../../types/response';
 
 @Injectable()

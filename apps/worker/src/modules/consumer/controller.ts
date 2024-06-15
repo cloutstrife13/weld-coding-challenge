@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { ConsumerService } from './consumer.service';
+import { ConsumerService } from './service';
 import {
   Ctx,
   MessagePattern,

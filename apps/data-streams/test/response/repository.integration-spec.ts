@@ -1,7 +1,7 @@
-import { ResponseRepository } from '../src/modules/response/response.repository';
+import { ResponseRepository } from '../../src/modules/response/repository';
 import { Test, TestingModule } from '@nestjs/testing';
-import { imports } from './constants';
-import { ResponseParams } from '../src/types/response';
+import { imports } from '../constants';
+import { ResponseParams } from '../../src/types/response';
 
 describe('ResponseRepository', () => {
   let app: TestingModule;

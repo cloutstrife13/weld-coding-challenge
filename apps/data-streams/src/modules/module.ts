@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConsumerModule } from './consumer/consumer.module';
-import { ResponseModule } from './response/response.module';
+import { ResponseModule } from './response/module';
 import { FetcherModule } from './fetcher/fetcher.module';
 
 @Module({

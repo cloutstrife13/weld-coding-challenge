@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ConsumerController } from './consumer.controller';
-import { ConsumerService } from './consumer.service';
-import { ResponseModule } from '../response/response.module';
+import { ConsumerController } from './controller';
+import { ConsumerService } from './service';
+import { ResponseModule } from '../response/module';
 
 @Module({
   imports: [ResponseModule],

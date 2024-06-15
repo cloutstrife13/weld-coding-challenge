@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
-import { ProducerModule } from '../producer/producer.module';
-import { FetcherService } from './fetcher.service';
+import { ProducerModule } from '../producer/module';
+import { FetcherService } from './service';
 
 @Module({
   imports: [HttpModule, ProducerModule],
