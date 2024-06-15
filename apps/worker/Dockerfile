@@ -1,6 +1,6 @@
 FROM node:18
 
-WORKDIR /app
+WORKDIR /app/worker
 
 COPY yarn.lock package.json ./
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3002
 
-CMD ["yarn", "nest", "start", "worker"]
+CMD ["yarn", "dev:worker"]

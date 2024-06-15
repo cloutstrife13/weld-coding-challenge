@@ -1,6 +1,6 @@
 FROM node:18
 
-WORKDIR /app
+WORKDIR /app/data-streams
 
 COPY yarn.lock package.json ./
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["yarn", "nest", "start", "data-streams"]
+CMD ["yarn", "dev:data-streams"]

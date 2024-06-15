@@ -5,7 +5,11 @@ services:
       context: .
       dockerfile: ./apps/data-streams/Dockerfile
     ports:
-      - '3001:3001'
+      - 3001:3001
+    volumes:
+      - ./:/app/data-streams
+      - /app/data-streams/node_modules
+    command: ['yarn', 'dev:data-streams']
     networks:
       - weld
     depends_on:
@@ -19,7 +23,11 @@ services:
       context: .
       dockerfile: ./apps/worker/Dockerfile
     ports:
-      - '3002:3002'
+      - 3002:3002
+    volumes:
+      - ./:/app/worker
+      - /app/worker/node_modules
+    command: ['yarn', 'dev:worker']
     depends_on:
       - rabbitmq
     networks:
