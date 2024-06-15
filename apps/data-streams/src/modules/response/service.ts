@@ -10,6 +10,8 @@ export class ResponseService {
   private readonly logger = new Logger(ResponseService.name);
 
   async getAllResponses(): Promise<Response[]> {
+    this.logger.debug('Requesting data acquisition of streamed data');
+
     const responses = await this.responseRepository.find();
 
     return responses;
@@ -18,6 +20,8 @@ export class ResponseService {
   async createResponse(
     responseParams: Omit<ResponseParams, 'dateAdded'>,
   ): Promise<Response> {
+    this.logger.debug('Requesting saving streamed data in database');
+
     const newResponse: ResponseParams = {
       ...responseParams,
       dateAdded: new Date(),

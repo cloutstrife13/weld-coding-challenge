@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Response } from './schema';
@@ -11,13 +11,23 @@ export class ResponseRepository {
     private workerResponseModel: Model<Response>,
   ) {}
 
+  private readonly logger = new Logger(ResponseRepository.name);
+
   async create(workerResponse: ResponseParams): Promise<Response> {
+    this.logger.debug('Attempt saving streamed data in database');
     const createdResponse = new this.workerResponseModel(workerResponse);
-    return createdResponse.save();
+
+    const savedResponse = createdResponse.save();
+    this.logger.debug('Streamed data saved');
+
+    return savedResponse;
   }
 
   async find(): Promise<Response[]> {
+    this.logger.debug('Attempt finding streamed data in database');
     const responses = this.workerResponseModel.find();
+
+    this.logger.debug(`${(await responses).length} entries found`);
     return responses;
   }
 }
