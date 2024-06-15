@@ -10,13 +10,13 @@ import { ToggleFetcherMessageDto } from 'apps/shared/src/toggle-message.dto';
 
 @Controller()
 export class ConsumerController {
-  constructor(private readonly ConsumerService: ConsumerService) {}
+  constructor(private readonly consumerService: ConsumerService) {}
 
   @MessagePattern('toggle-fetcher-message')
   toggleFetcher(
     @Payload() data: ToggleFetcherMessageDto,
     @Ctx() context: RmqContext,
   ) {
-    this.ConsumerService.handleToggleFetcherMessage(data, context);
+    this.consumerService.handleToggleFetcherMessage(data, context);
   }
 }
