@@ -1,13 +1,30 @@
-import { Injectable } from '@nestjs/common';
-import { DatabaseService } from '../database/database.service';
+import { Injectable, Logger } from '@nestjs/common';
+import { Response } from './response.schema';
+import { ResponseRepository } from './response.repository';
+import { ResponseParams } from '../../types/response';
 
 @Injectable()
 export class ResponseService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly responseRepository: ResponseRepository) {}
 
-  async getAllResponses(): Promise<unknown[]> {
-    const responses = await this.databaseService.find();
+  private readonly logger = new Logger(ResponseService.name);
+
+  async getAllResponses(): Promise<Response[]> {
+    const responses = await this.responseRepository.find();
 
     return responses;
+  }
+
+  async createResponse(
+    responseParams: Omit<ResponseParams, 'dateAdded'>,
+  ): Promise<Response> {
+    const newResponse: ResponseParams = {
+      ...responseParams,
+      dateAdded: new Date(),
+    };
+
+    const createdResponse = await this.responseRepository.create(newResponse);
+
+    return createdResponse;
   }
 }

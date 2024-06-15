@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConsumerController } from './consumer.controller';
 import { ConsumerService } from './consumer.service';
-import { DatabaseModule } from '../database/database.module';
+import { ResponseModule } from '../response/response.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [ResponseModule],
   controllers: [ConsumerController],
   providers: [ConsumerService],
 })

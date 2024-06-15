@@ -1,21 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { WorkerResponse } from './database.schema';
+import { Response } from './response.schema';
+import { ResponseParams } from '../../types/response';
 
 @Injectable()
-export class DatabaseService {
+export class ResponseRepository {
   constructor(
-    @InjectModel(WorkerResponse.name)
-    private workerResponseModel: Model<unknown>,
+    @InjectModel(Response.name)
+    private workerResponseModel: Model<Response>,
   ) {}
 
-  async create(workerResponse: unknown): Promise<unknown> {
+  async create(workerResponse: ResponseParams): Promise<Response> {
     const createdResponse = new this.workerResponseModel(workerResponse);
     return createdResponse.save();
   }
 
-  async find(): Promise<unknown[]> {
+  async find(): Promise<Response[]> {
     const responses = this.workerResponseModel.find();
     return responses;
   }

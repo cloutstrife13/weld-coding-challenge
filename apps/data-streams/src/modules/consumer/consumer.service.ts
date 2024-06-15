@@ -1,10 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { RmqContext } from '@nestjs/microservices';
-import { DatabaseService } from '../database/database.service';
+import { ResponseService } from '../response/response.service';
 
 @Injectable()
 export class ConsumerService {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(private readonly responseService: ResponseService) {}
 
   private readonly logger = new Logger(ConsumerService.name);
 
@@ -17,7 +17,11 @@ export class ConsumerService {
   }
 
   async storeExternalApiResponseInDatabase(data: unknown) {
-    await this.databaseService.create(data);
+    await this.responseService.createResponse({
+      sourceUrl: 'https://cat-fact.herokuapp.com/facts',
+      data,
+    });
+
     this.logger.debug('Response obtained from worker and saved');
   }
 
