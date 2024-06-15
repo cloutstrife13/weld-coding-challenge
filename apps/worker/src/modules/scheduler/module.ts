@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { SchedulerService } from './scheduler.service';
-import { FetcherModule } from '../fetcher/fetcher.module';
+import { SchedulerService } from './service';
+import { FetcherModule } from '../fetcher/module';
 
 @Module({
   imports: [FetcherModule],

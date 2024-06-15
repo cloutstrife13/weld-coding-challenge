@@ -1,4 +1,4 @@
-import { AppModule } from './modules/app.module';
+import { AppModule } from './modules/module';
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
