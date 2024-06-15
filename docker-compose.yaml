@@ -3,6 +3,7 @@ services:
     container_name: data-streams
     build:
       context: .
+      dockerfile: ./apps/data-streams/Dockerfile
     ports:
       - '3001:3001'
     networks:
@@ -16,7 +17,7 @@ services:
     container_name: worker
     build:
       context: .
-      dockerfile: ./Dockerfile.worker
+      dockerfile: ./apps/worker/Dockerfile
     ports:
       - '3002:3002'
     depends_on:
